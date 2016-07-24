@@ -1,0 +1,86 @@
+/* Body */
+
+body {
+  background: url('../images/bg.jpg');
+}
+
+/* Body */
+
+.container h4 {
+  background-color: white;
+  margin: 0;
+  color: #0060BF;
+
+}
+.panel {
+  margin: 0 20px 5px 20px;
+  display: inline-block;
+  text-align: center;
+}
+.panel-body button {
+  padding: 0;
+}
+.panel-footer {
+  margin: 0;
+  padding: 0;
+}
+button img {
+  height: 100px;
+  width: 100px;
+}
+.player,
+.opponent {
+  background-color: green;
+}
+.remaining {
+  background-color: red;
+}
+
+/* Header */
+
+.page-header {
+  margin: 20px 0 0 0;
+  text-align: center;
+}
+.page-header img {
+  width: 450px;
+}
+.page-header h1 {
+  margin: 10px 0 0 0;
+  font-family: 'Russo One', sans-serif;
+  color: #0060BF;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+/* Footer */
+
+#footer {
+  margin: 35px auto;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Game Output */
+
+/* --------------------------------------
+   Media Queries
+   -------------------------------------- */
+
+/* Phone */
+
+@media screen and (max-width: 611px) {
+
+
+/* Tablet */
+
+@media screen and (min-width: 600px) and (max-width: 767px) {
+
+
+/* Laptop */
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+
+/* large Screen */
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {

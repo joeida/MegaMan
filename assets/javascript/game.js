@@ -5,25 +5,25 @@ var character = {
         health: 100,
         attack: 5,
         counter: 10,
-        chosen: false
+        alive: true
     },
     'mega-zero': {
         health: 120,
         attack: 8,
         counter: 15,
-        chosen: false
+        alive: true
     },
     'mega-rogue': {
         health: 150,
         attack: 11,
         counter: 20,
-        chosen: false
+        alive: true
     },
     'mega-beast': {
         health: 180,
         attack: 14,
         counter: 25,
-        chosen: false
+        alive: true
     }
 };
 
@@ -67,6 +67,8 @@ var processing = {
             output.chooseCharacter();
         } else if (this.opponentChosen === false) {
             output.chooseOpponent();
+        } else if (character[this.player].alive === false) {
+            return;
         } else {
             this.dynamicPlayerAttack += character[this.player].attack;
             character[this.player].health -= character[this.opponent].counter;
@@ -90,6 +92,7 @@ var output = {
     },
     chooseOpponent: function() {
         var chooseOpponentText = 'Please Choose an Opponent';
+        $('#attack-text p').css('color', 'red');
         $('#attack-text p').text(chooseOpponentText);
     },
     displayPlayerHealth: function() {
@@ -99,17 +102,23 @@ var output = {
         $('.enemy .' + processing.opponent + ' .opponent .panel-footer p').text('Health ' + character[processing.opponent].health);
     },
     displayAttack: function() {
-        var attackText = 'You attacked for ' + processing.dynamicPlayerAttack + '\n' + 'Your opponent attacked for ' + character[processing.opponent].counter;
+        var attackText = 'You attacked for ' + processing.dynamicPlayerAttack + '\nYour opponent attacked for ' + character[processing.opponent].counter;
         $('#attack-text p').text(attackText);
     },
     clearOutput: function() {
         $('#attack-text p').text('');
     },
-    displayWin: function() {
-        $('#attack-text p').text('Congratulations, You win!');
+    displayWinRound: function() {
+        $('#attack-text p').text('You attacked for ' + processing.dynamicPlayerAttack + '\nYour opponent attacked for ' + character[processing.opponent].counter + '\nWell Done...You Defeated This Opponent!\nChoose another opponent.');
+        $('#attack-text p').css('color', 'blue');
+    },
+    displayWinGame: function() {
+        $('#attack-text p').text('Congratulations!  You Defeated All Your Opponents and Win The Game!\nPress Below to Play Again.');
+        $('#attack-text p').css('color', 'green');
     },
     displayLoss: function() {
-        $('#attack-text p').text('Sorry, you lose...Game Over');
+        $('.chosen .' + processing.player + ' .player').css('background-color', 'red');
+        $('#attack-text p').text('Sorry, you lose...Game Over\nPress Below to Play Again.');
     },
     displayChosen: function() {
         for (var hideCharacter in character.characterList) {
@@ -130,22 +139,52 @@ var output = {
             $('.enemy .' + character.characterList[hideCharacter]).css('display', 'none');
         }
         $('.enemy .' + processing.opponent).css('display', 'inline-block');
+    },
+    clearOpponent: function() {
+        $('.enemy .' + processing.opponent).css('display', 'none');
+    },
+    hideAttackButton: function() {
+        $('#attackButton').css('display', 'none');
     }
 };
 
+output.chooseCharacter();
+var characterCurrent = '';
+var opponentCurrent = '';
 $(document).ready(function () {
     $('.charButton').on('click', function() {
         if (processing.playerChosen === false && processing.opponentChosen === false) {
-            var characterChosen = this.value;
-            processing.chooseCharacter(characterChosen);
+            characterCurrent = this.value;
+            processing.chooseCharacter(characterCurrent);
             output.chooseOpponent();
-        } else if (processing.playerChosen === true && processing.opponentChosen === false) {
-            var opponentChosen = this.value;
-            processing.chooseOpponent(opponentChosen);
+        }
+        if (processing.playerChosen === true && processing.opponentChosen === false) {
+            opponentCurrent = this.value;
+            processing.chooseOpponent(opponentCurrent);
         }
     });
     $('#attackButton').on('click', function() {
         processing.attackOpponent();
+        // if (character.remainingList.length < 1) {
+        //     output.displayWinGame();
+        // }
+        if (character[characterCurrent].health <= 0) {
+            output.displayLoss();
+            output.hideAttackButton();
+            character[characterCurrent].alive = false;
+        }
+        if (character[opponentCurrent].health <= 0) {
+            output.displayWinRound();
+            output.displayPlayerHealth();
+            output.displayOpponentHealth();
+            output.clearOpponent();
+            character[opponentCurrent].alive = false;
+            processing.resetOpponentChosen();
+            if (character.remainingList.length < 1) {
+                output.displayWinGame();
+                output.hideAttackButton();
+            }
+        }
     });
 });
 

@@ -10,8 +10,8 @@ body {
   text-align: center;
 }
 .container h4 {
-  background-color: white;
   margin: 0;
+  background-color: white;
   color: #0060BF;
 
 }
@@ -36,6 +36,14 @@ button img {
 }
 .remaining {
   background-color: red;
+}
+#attack-text {
+  background-color: white;
+  color: red;
+  font-size: 22px;
+}
+#attack-text p {
+  white-space: pre-wrap;
 }
 
 /* Header */

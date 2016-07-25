@@ -3,26 +3,26 @@ var character = {
     remainingList: ['mega-super', 'mega-zero', 'mega-rogue', 'mega-beast'],
     'mega-super': {
         health: 130,
-        attack: 7,
-        counter: 34,
+        attack: 14,
+        counter: 25,
         alive: true
     },
     'mega-zero': {
         health: 140,
-        attack: 8,
-        counter: 31,
+        attack: 14,
+        counter: 16,
         alive: true
     },
     'mega-rogue': {
         health: 150,
-        attack: 18,
-        counter: 15, 
+        attack: 14,
+        counter: 16, 
         alive: true
     },
     'mega-beast': {
-        health: 180,
-        attack: 15,
-        counter: 15,
+        health: 160,
+        attack: 14,
+        counter: 20,
         alive: true
     }
 };

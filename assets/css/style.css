@@ -6,6 +6,9 @@ body {
 
 /* Body */
 
+.container {
+  text-align: center;
+}
 .container h4 {
   background-color: white;
   margin: 0;
@@ -15,7 +18,6 @@ body {
 .panel {
   margin: 0 20px 5px 20px;
   display: inline-block;
-  text-align: center;
 }
 .panel-body button {
   padding: 0;

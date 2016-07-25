@@ -2,27 +2,27 @@ var character = {
     characterList: ['mega-super', 'mega-zero', 'mega-rogue', 'mega-beast'],
     remainingList: ['mega-super', 'mega-zero', 'mega-rogue', 'mega-beast'],
     'mega-super': {
-        health: 100,
-        attack: 5,
-        counter: 10,
+        health: 130,
+        attack: 7,
+        counter: 34,
         alive: true
     },
     'mega-zero': {
-        health: 120,
+        health: 140,
         attack: 8,
-        counter: 15,
+        counter: 31,
         alive: true
     },
     'mega-rogue': {
         health: 150,
-        attack: 11,
-        counter: 20,
+        attack: 18,
+        counter: 15, 
         alive: true
     },
     'mega-beast': {
         health: 180,
-        attack: 14,
-        counter: 25,
+        attack: 15,
+        counter: 15,
         alive: true
     }
 };
@@ -69,6 +69,12 @@ var processing = {
             output.chooseOpponent();
         } else if (character[this.player].alive === false) {
             return;
+        } else if (this.dynamicPlayerAttack > character[this.opponent].health && character[this.player].health < character[this.opponent].counter) {
+            this.dynamicPlayerAttack += character[this.player].attack;
+            character[this.opponent].health -= processing.dynamicPlayerAttack;
+            output.displayAttack();
+            output.displayPlayerHealth();
+            output.displayOpponentHealth();
         } else {
             this.dynamicPlayerAttack += character[this.player].attack;
             character[this.player].health -= character[this.opponent].counter;
@@ -165,14 +171,6 @@ $(document).ready(function () {
     });
     $('#attackButton').on('click', function() {
         processing.attackOpponent();
-        // if (character.remainingList.length < 1) {
-        //     output.displayWinGame();
-        // }
-        if (character[characterCurrent].health <= 0) {
-            output.displayLoss();
-            output.hideAttackButton();
-            character[characterCurrent].alive = false;
-        }
         if (character[opponentCurrent].health <= 0) {
             output.displayWinRound();
             output.displayPlayerHealth();
@@ -184,6 +182,10 @@ $(document).ready(function () {
                 output.displayWinGame();
                 output.hideAttackButton();
             }
+        } else if (character[characterCurrent].health <= 0) {
+            output.displayLoss();
+            output.hideAttackButton();
+            character[characterCurrent].alive = false;
         }
     });
 });

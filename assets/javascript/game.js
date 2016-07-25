@@ -58,7 +58,7 @@ var processing = {
         if (indexRemain !== -1) {
             character.remainingList.splice(indexRemain, 1);
         }
-        output.displayDefault();
+        output.clearOutput();
         output.displayRemain();
         output.displayOpponent();
     },
@@ -68,7 +68,6 @@ var processing = {
         } else if (this.opponentChosen === false) {
             output.chooseOpponent();
         } else {
-            output.displayDefault();
             this.dynamicPlayerAttack += character[this.player].attack;
             character[this.player].health -= character[this.opponent].counter;
             character[this.opponent].health -= processing.dynamicPlayerAttack;
@@ -103,7 +102,7 @@ var output = {
         var attackText = 'You attacked for ' + processing.dynamicPlayerAttack + '\n' + 'Your opponent attacked for ' + character[processing.opponent].counter;
         $('#attack-text p').text(attackText);
     },
-    displayDefault: function() {
+    clearOutput: function() {
         $('#attack-text p').text('');
     },
     displayWin: function() {
@@ -112,33 +111,24 @@ var output = {
     displayLoss: function() {
         $('#attack-text p').text('Sorry, you lose...Game Over');
     },
-    hideChosen: function() {
+    displayChosen: function() {
         for (var hideCharacter in character.characterList) {
             $('.chosen .' + character.characterList[hideCharacter]).css('display', 'none');
         }
-    },
-    hideRemain: function() {
-        for (var hideCharacter in character.characterList) {
-            $('.outstanding .' + character.characterList[hideCharacter]).css('display', 'none');
-        }
-    },
-    hideOpponent: function() {
-        for (var hideCharacter in character.characterList) {
-            $('.enemy .' + character.characterList[hideCharacter]).css('display', 'none');
-        }
-    },
-    displayChosen: function() {
-        this.hideChosen();
         $('.chosen .' + processing.player).css('display', 'inline-block');
     },
     displayRemain: function() {
-        this.hideRemain();
+        for (var hideCharacter in character.characterList) {
+            $('.outstanding .' + character.characterList[hideCharacter]).css('display', 'none');
+        }
         for (var remainingCharacter in character.remainingList) {
             $('.outstanding .' + character.remainingList[remainingCharacter]).css('display', 'inline-block');
         }
     },
     displayOpponent: function() {
-        this.hideOpponent();
+        for (var hideCharacter in character.characterList) {
+            $('.enemy .' + character.characterList[hideCharacter]).css('display', 'none');
+        }
         $('.enemy .' + processing.opponent).css('display', 'inline-block');
     }
 };

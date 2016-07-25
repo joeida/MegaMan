@@ -5,21 +5,25 @@ var character = {
         health: 100,
         attack: 5,
         counter: 10,
+        chosen: false
     },
     'mega-zero': {
         health: 120,
         attack: 8,
         counter: 15,
+        chosen: false
     },
     'mega-rogue': {
         health: 150,
         attack: 11,
         counter: 20,
+        chosen: false
     },
     'mega-beast': {
         health: 180,
         attack: 14,
         counter: 25,
+        chosen: false
     }
 };
 
@@ -34,6 +38,7 @@ var processing = {
     chooseCharacter: function(char) {
         this.player = char;
         this.playerChosen = true;
+        character[this.player].chosen = true;
         var indexRemain = character.remainingList.indexOf(this.player);
         if (indexRemain !== -1) {
             character.remainingList.splice(indexRemain, 1);
@@ -43,7 +48,12 @@ var processing = {
     },
     chooseOpponent: function(char) {
         this.opponent = char;
+        if (this.player === this.opponent) {
+            this.opponent = '';
+            return;
+        }
         this.opponentChosen = true;
+        character[this.opponent].chosen = true;
         var indexRemain = character.remainingList.indexOf(this.opponent);
         if (indexRemain !== -1) {
             character.remainingList.splice(indexRemain, 1);

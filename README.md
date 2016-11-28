@@ -1,4 +1,4 @@
-# MegaMan
+# MegaMan RPG
 
 ### Overview
 * Create MegaMan RPG game using HTML, CSS, Javascript.
@@ -18,5 +18,5 @@
 <img width="576" alt="megaman" src="https://cloud.githubusercontent.com/assets/18523345/20646088/50868eee-b428-11e6-82b5-6fca49a4c1a7.png">
 
 ### Links
-[MegaMan](https://joeida.github.io/MegaMan)
+[MegaMan RPG](https://joeida.github.io/MegaMan)
 

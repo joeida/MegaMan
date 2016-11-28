@@ -4,7 +4,7 @@
 * Create MegaMan RPG game using HTML, CSS, Javascript.
 
 ### Objective
-* Ability to use HTML, CSS, Javascript to create a basic RPG game.
+* Demonstrate the use of HTML, CSS, and Javascript in the creation of a basic RPG game.
   1. Create four characters with different attack powers.
   2. Allow for choice of character.
   3. Allow for choice of opponent.
